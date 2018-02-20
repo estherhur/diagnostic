@@ -1,0 +1,59 @@
+---
+title: "Diagnostics"
+author: "Esther Hur"
+date: "February 20, 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## Test
+```{load_things, message=FALSE, echo=TRUE}
+library(ggfortify)
+library(tidyverse)
+
+my_cars_data <- read_csv("../data/my_data.csv")
+head(my_cars_data)
+```
+
+## Model
+
+```{r model, echo=TRUE}
+mod1 <- lm(mpg ~wt, data = mtcars)
+  summary(mod1)$coef
+```
+## Plot
+
+```{r, fig.width=8}
+mtcars %>%
+  ggplot (., aes(x = wt, y = mpg)) +
+  geom_point()+
+  geom_smooth()
+
+```
+
+##The mean of the residuals
+```{r}
+mean(mod1$residuals)
+```
+
+##Homoskedastisity
+
+```{r}
+autoplot(mod1, which = c(1, 3))
+```
+
+##No autocorrelation
+
+```{r}
+acf(mod1$residuals)
+```
+
+## Normality of residuals
+
+```{r}
+autoplot(mod1, which = 2)
+```
+
+

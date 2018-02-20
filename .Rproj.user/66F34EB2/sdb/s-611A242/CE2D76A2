@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Diagnostics\"\nauthor: \"Esther Hur\"\ndate: \"February 20, 2018\"\noutput: ioslides_presentation\n---\n\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = FALSE)\n```\n## Test\n```{load_things, message=FALSE, echo=TRUE}\nlibrary(ggfortify)\nlibrary(tidyverse)\n\nmy_cars_data <- read_csv(\"../data/my_data.csv\")\nhead(my_cars_data)\n```\n\n## Model\n\n```{r model, echo=TRUE}\nmod1 <- lm(mpg ~wt, data = mtcars)\n  summary(mod1)$coef\n```\n## Plot\n\n```{r, fig.width=8}\nmtcars %>%\n  ggplot (., aes(x = wt, y = mpg)) +\n  geom_point()+\n  geom_smooth()\n\n```\n\n##The mean of the residuals\n```{r}\nmean(mod1$residuals)\n```\n\n##Homoskedastisity\n\n```{r}\nautoplot(mod1, which = c(1, 3))\n```\n\n##No autocorrelation\n\n```{r}\nacf(mod1$residuals)\n```\n\n## Normality of residuals\n\n```{r}\nautoplot(mod1, which = 2)\n```\n\n\n",
+    "created" : 1519145968298.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4096400216",
+    "id" : "CE2D76A2",
+    "lastKnownWriteTime" : 1519147281,
+    "last_content_update" : 1519147281237,
+    "path" : "~/Desktop/diagnostic/slides/index.Rmd",
+    "project_path" : "slides/index.Rmd",
+    "properties" : {
+        "last_setup_crc32" : "6DAB7807c4e2d899",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
